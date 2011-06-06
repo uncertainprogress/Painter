@@ -27,8 +27,13 @@ Painter = {
     
     $("#resetbutton").button().click(Painter.reset);
     
+    Painter.setupColorPicker('#color1');
     
-    $('#colorSelector').ColorPicker({
+    
+  },
+  
+  setupColorPicker: function(id) {
+    $(id).ColorPicker({
     	color: '#0000ff',
     	onShow: function (colpkr) {
     		$(colpkr).fadeIn(500);
@@ -39,12 +44,10 @@ Painter = {
     		return false;
     	},
     	onChange: function (hsb, hex, rgb) {
-    		$('#colorSelector div').css('backgroundColor', '#' + hex);
+    		$(id + ' div').css('backgroundColor', '#' + hex);
     	}
     });
-    
   },
-  
   
   start: function() {
     
