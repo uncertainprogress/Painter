@@ -38,6 +38,8 @@
 	width: 40%;
 	border: 1px solid black;
 	margin: 2em 0em 2em 2em;
+	overflow-x: visible;
+	overflow-y: hidden;
 }
 
 
@@ -45,4 +47,8 @@
 	margin: 2em 2em 2em 3em;
 	width: 300px;
 	float: right;
+}
+
+.square {
+	float: left;
 }
