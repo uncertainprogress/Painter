@@ -1,8 +1,8 @@
 
 PIXELSPERINCH = 8
 
-WIDTH = 133.5*PIXELSPERINCH + 2
-HEIGHT = 94*PIXELSPERINCH + 2
+WIDTH = 133.5*PIXELSPERINCH
+HEIGHT = 94*PIXELSPERINCH
 
 $(function(){
   Painter.init();
@@ -28,6 +28,7 @@ Painter = {
     $("#start").button().click(Painter.start);
     
     $("#resetbutton").button().click(Painter.reset);
+		$("#reloadbutton").button().click(Painter.reload)
     
     Painter.setupColorPicker('#color1');
 		Painter.setupColorPicker('#color2');
@@ -75,6 +76,10 @@ Painter = {
     $("#setup").slideDown();
     
     
-  }
+  },
+
+	reload: function() {
+		
+	}
   
 }

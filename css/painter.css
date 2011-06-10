@@ -29,6 +29,20 @@
 	background: url(../colorpicker/images/select.png) center;
 }
 
+#wrapper {
+	width: 110%;
+	float: left;
+}
+
 #mainCanvas {
+	width: 40%;
 	border: 1px solid black;
+	margin: 2em 0em 2em 2em;
+}
+
+
+#infotable {
+	margin: 2em 2em 2em 3em;
+	width: 300px;
+	float: right;
 }
