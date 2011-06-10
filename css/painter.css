@@ -13,6 +13,8 @@
 }
 
 .colorSelector {
+	float: left;
+	margin: 2em;
 	position: relative;
 	width: 36px;
 	height: 36px;
@@ -25,4 +27,8 @@
 	width: 30px;
 	height: 30px;
 	background: url(../colorpicker/images/select.png) center;
+}
+
+#mainCanvas {
+	border: 1px solid black;
 }
