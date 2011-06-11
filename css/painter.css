@@ -31,7 +31,6 @@
 
 #wrapper {
 	width: 110%;
-	float: left;
 }
 
 #mainCanvas {
@@ -45,10 +44,15 @@
 
 #infotable {
 	margin: 2em 2em 2em 3em;
-	width: 300px;
-	float: right;
 }
 
 .square {
 	float: left;
+}
+
+.colorpick {
+	height: 60px;
+	width: 60px;
+	float: left;
+	margin: 10px;
 }

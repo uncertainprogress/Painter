@@ -4,14 +4,16 @@ PIXELSPERINCH = 8
 WIDTH = 133.5*PIXELSPERINCH
 HEIGHT = 94*PIXELSPERINCH
 
-PATTERNS = ['Random', 'Alternating']
+PATTERNS = ['Alternating', 'Random']
+
+var colorHolder = ""
 
 $(function(){
   Painter.init();
 })
 
 Painter = {
-  
+  colors: [],
   
   init: function() {
     $("#reset").hide()
@@ -29,7 +31,6 @@ Painter = {
 		
 		for(var p in PATTERNS) {
 			$("#pattern").addOption(PATTERNS[p], PATTERNS[p]);
-			$.getScript("scripts/Pattern" + PATTERNS[p] + ".js");
 		}
 		
     $("#start").button().click(Painter.start);
@@ -76,21 +77,17 @@ Painter = {
 
 		$("#mainCanvas").css("height", HEIGHT);
 		$("#mainCanvas").css("width", WIDTH);
+		$("#mainCanvas").html("");
 		
 		var tapewidth = $("#tapewidth").val()*PIXELSPERINCH;
 		var numsquares = $("#numsquares").val();
 		var squarewidth = WIDTH/numsquares;
 		squarewidth = squarewidth - ($("#tapewidth").val() * PIXELSPERINCH);
-		
 		var squareshigh = Math.ceil(HEIGHT/squarewidth);
-		
-		console.log(squarewidth/PIXELSPERINCH);
-		console.log(squareshigh);
-		console.log(tapewidth);
 		
 		//set the top and left padding on the main canvas to be the tape width
 		$("#mainCanvas").css("padding", tapewidth +"px 0px 0px " + tapewidth + "px");
-		//set the bottom and right padding on the squares to the tapewidth
+		
 		
 		for(var j=0; j<squareshigh; j++) {
 			for(var i=0; i<numsquares; i++) {
@@ -98,18 +95,78 @@ Painter = {
 				$("#mainCanvas").append("<div id='" + id + "' class='square'></div>");
 				$("#"+id).css("height", squarewidth);
 				$("#"+id).css("width", squarewidth);
+				//set the bottom and right margin on the squares to the tapewidth
 				$("#"+id).css("margin", "0px " + tapewidth + "px "+ tapewidth + "px 0px");
 			}
 		}
 		
-		for(i=0; i<numsquares; i++) {
-			for(j=0; j< squareshigh; j++) {
-				id = i + "-" + j;
-				$("#" + id).css("backgroundColor", "#0000ff")
-			}
+		Painter.colors = [];
+		for(i=1; i<=4; i++) {
+			Painter.colors.push($("#color" + i +" div").css("backgroundColor"));
 		}
 		
+		$.getScript("scripts/Pattern" + $("#pattern").val() + ".js", function() {
+			
+			var pattern = new Pattern(Painter.colors);
+			for(i=0; i<numsquares; i++) {
+				for(j=0; j< squareshigh; j++) {
+					id = i + "-" + j;
+					$("#" + id).css("backgroundColor", pattern.getColor())
+				}
+			}
+		});
 		
+		$(".square").draggable({
+			revert: 'true',
+			cursor: "move",
+			cursorAt: { top: -8, left: -10 },
+			helper: function( event ) {
+				return $( "<div class='ui-widget-header'>Swap With</div>" );
+			},
+			stop: function( event ) {
+				var color = $(this).css('backgroundColor');
+				$(this).css('backgroundColor', colorHolder.css('backgroundColor'));
+				colorHolder.css('backgroundColor', color);
+			}
+		});
+		
+		$(".square").droppable({
+			drop: function(event, ui) {
+				colorHolder = $(this)
+			}
+		})
+		
+		$(".square").click(function() {
+			var clicked = $(this);
+			var html = "";
+			for(var c in Painter.colors) {
+				html = html + "<div class='colorpick'></div>";
+			}
+			$("#newcolordialog").html($(html));
+			var ct = 0;
+			$("#newcolordialog .colorpick").each(function() {
+				$(this).css("backgroundColor", Painter.colors[ct]);
+				ct = ct + 1;
+			})
+			
+			$("#newcolordialog .colorpick").click(function() {
+				$("#newcolordialog").dialog('destroy');
+				clicked.css('backgroundColor', $(this).css('backgroundColor'));
+			})
+			console.log($("#newcolordialog"))
+			$('#newcolordialog').dialog({
+				closeOnEscape: true,
+				position: "center",
+				resize: false,
+		    height:300,
+		    width:300,
+		    modal:true,
+		    title: "Pick a New Color",
+				buttons: {"Cancel": function(){$(this).dialog('destroy');}},
+		   });
+		})
+		
+		$("#infotable").html("<h2>Square Size: " + Math.floor((squarewidth/PIXELSPERINCH)*1000)/1000 + "</h2><h2>" + squareshigh + " Squares High and "+ numsquares +" Squares Wide</h2>")
 		
   },
   
@@ -121,7 +178,7 @@ Painter = {
   },
 
 	reload: function() {
-		
+		Painter.start();
 	}
   
 }
