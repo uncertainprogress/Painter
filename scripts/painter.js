@@ -38,21 +38,21 @@ Painter = {
     $("#resetbutton").button().click(Painter.reset);
 		$("#reloadbutton").button().click(Painter.reload);
     
-    Painter.setupColorPicker('#color1');
-		Painter.setupColorPicker('#color2');
-		Painter.setupColorPicker('#color3');
-		Painter.setupColorPicker('#color4');
+    Painter.setupColorPicker('#color1', "rgb(203,195,184)");
+		Painter.setupColorPicker('#color2', "rgb(188,200,180)");
+		Painter.setupColorPicker('#color3', "rgb(167,193,194)");
+		Painter.setupColorPicker('#color4', "rgb(252,232,185)");
   },
   
-  setupColorPicker: function(id) {
-		var cl = '#0000ff'
+  setupColorPicker: function(id, defcolor) {
+		var cl = defcolor;
 		
-		if($.cookie(id)) {
+		/*if($.cookie(id)) {
 			cl = "#" + $.cookie(id);
-		}
+		}*/
 		
 		$(id + " div").css('backgroundColor', cl);
-		
+		console.log(cl);
 	
     $(id).ColorPicker({
     	color: cl,
@@ -166,7 +166,7 @@ Painter = {
 		   });
 		})
 		
-		$("#infotable").html("<h2>Square Size: " + Math.floor((squarewidth/PIXELSPERINCH)*1000)/1000 + "</h2><h2>" + squareshigh + " Squares High and "+ numsquares +" Squares Wide</h2>")
+		$("#infotable").html("<h2>Square Size: " + Math.floor((squarewidth/PIXELSPERINCH)*1000)/1000 + "</h2><h2>" + squareshigh-1 + " Squares High and "+ numsquares +" Squares Wide</h2>")
 		
   },
   
