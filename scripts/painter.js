@@ -42,6 +42,7 @@ Painter = {
 		Painter.setupColorPicker('#color2', "rgb(188,200,180)");
 		Painter.setupColorPicker('#color3', "rgb(167,193,194)");
 		Painter.setupColorPicker('#color4', "rgb(252,232,185)");
+		Painter.setupColorPicker('#color5', "rgb(238,233,224)");
   },
   
   setupColorPicker: function(id, defcolor) {
@@ -101,7 +102,7 @@ Painter = {
 		}
 		
 		Painter.colors = [];
-		for(i=1; i<=4; i++) {
+		for(i=1; i<=5; i++) {
 			Painter.colors.push($("#color" + i +" div").css("backgroundColor"));
 		}
 		
@@ -166,7 +167,7 @@ Painter = {
 		   });
 		})
 		
-		$("#infotable").html("<h2>Square Size: " + Math.floor((squarewidth/PIXELSPERINCH)*1000)/1000 + "</h2><h2>" + squareshigh-1 + " Squares High and "+ numsquares +" Squares Wide</h2>")
+		$("#infotable").html("<h2>Square Size: " + Math.floor((squarewidth/PIXELSPERINCH)*1000)/1000 + "</h2><h2>" + squareshigh + " Squares High and "+ numsquares +" Squares Wide</h2>")
 		
   },
   
