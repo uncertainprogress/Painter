@@ -22,7 +22,7 @@ Painter = {
     for(i=3; i<= 9; i++) {
 			$('#numsquares').addOption(i, i);
 		}
-		$('#numsquares').selectOptions("7", true);
+		$('#numsquares').selectOptions("4", true);
 		
 		for(i=3; i<=12; i++) {
 		  $("#tapewidth").addOption(i*0.25, i*0.25);
@@ -42,7 +42,8 @@ Painter = {
 		Painter.setupColorPicker('#color2', "rgb(188,200,180)");
 		Painter.setupColorPicker('#color3', "rgb(167,193,194)");
 		Painter.setupColorPicker('#color4', "rgb(252,232,185)");
-		Painter.setupColorPicker('#color5', "rgb(238,233,224)");
+		//Painter.setupColorPicker('#color5', "rgb(255,213,145)"); Orange
+		Painter.setupColorPicker('#color5', "rgb(140,112,88)");
   },
   
   setupColorPicker: function(id, defcolor) {
