@@ -42,8 +42,9 @@ Painter = {
 		Painter.setupColorPicker('#color2', "rgb(188,200,180)");
 		Painter.setupColorPicker('#color3', "rgb(167,193,194)");
 		Painter.setupColorPicker('#color4', "rgb(252,232,185)");
+		Painter.setupColorPicker('#color5', "rgb(255,203,153)");
 		//Painter.setupColorPicker('#color5', "rgb(255,213,145)"); Orange
-		Painter.setupColorPicker('#color5', "rgb(140,112,88)");
+		//Painter.setupColorPicker('#color5', "rgb(140,112,88)"); Dark Brown
   },
   
   setupColorPicker: function(id, defcolor) {
